@@ -10,158 +10,45 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 <script src="http://localhost/~intern/repos/backboneprj/library/jquery.js"></script>
 <script src="http://localhost/~intern/repos/backboneprj/library/underscore.js"></script>  
 <script src="http://localhost/~intern/repos/backboneprj/library/backbone.js"></script>
+<script src="http://localhost/~intern/repos/backboneprj/application.js"> </script>
+
 <script type="text/javascript" >  
-
-
-var init = function(JSONdata){
-
-	var BlogItem = Backbone.Model.extend({ });
-	var BlogCollection = Backbone.Collection.extend({ model: BlogItem });
-	var blogCollection = new BlogCollection();
-
-	var BlogView = Backbone.View.extend({
-
-		template: _.template('<h3> <%= title %></h3>' +
-			                 '<span> <%= description %> </span> </br> </br>' +
-			                 '<span> <%= author %></span>'),
-		render: function(){
-
-			var attributes = this.model.toJSON();
-			this.$el.html(this.template(attributes))
-		}
-	});
-
-	blogCollection.reset(JSONdata);
-
-	var BlogCollectionView = Backbone.View.extend({
-
-		initialize: function(){
-
-			this.collection.on('add', this.addOne, this);
-		},
-
-		render: function(){
-			this.collection.forEach(this.addOne, this);
-		},
-
-		addOne: function(blogItem){
-			var blogView  = new BlogView({model: blogItem});
-			blogView.render();
-			this.$el.append(blogView.el);
-		}
-	});
-
-	var blogCollectionView = new BlogCollectionView({collection: blogCollection});
-
-
-	var refreshBlog = function(){
-
-	blogCollectionView.render();
-
-	$('#blogroll').html(blogCollectionView.el);
-
-	};
-
-    refreshBlog();
-    
-
-	$('#newentry').submit( function(){
-
-		var title = this.elements[0].value;
-		var description = this.elements[1].value;
-		var author = this.elements[2].value; 
-
-		$('.input').val('');
-
-
-		var newblogItem = new BlogItem(
-			{title: title, description: description, author:author});
-
-		blogCollection.add(newblogItem);
-
-		//refreshBlog();
-			
-		
-		console.log(title, author, description);
-		console.log(blogCollection);
-
-		return false;
-
-	});
-
-};
 
 $(function() {
 	var JSONdata = [];
 	var datafile = $.getJSON("http://localhost/~intern/repos/backboneprj/data.json", function(data){
 
 		$.each(data, function(key, val) {
-
 			JSONdata.push(val);
 			JSONdata = _.flatten(JSONdata);
+		});
 
-		})
 		init(JSONdata);
 	});
 });
-
 
 </script>
 
 </head>
 
-<body style="width:100%;height:100%;background-size:100% 100%;background-repeat:no-repeat;overflow: hidden; margin-top:0px">
+<body style="width:100%;height:100%;background-size:100% 100%;margin:0px">
 
-<div id='blogroll' style="width:850px; border-left: 1px solid grey; border-right:1px solid grey; position:relative; margin:auto; padding-top:50px; padding-left:50px; overflow:auto;">
-
-</div>
-
-<div id='form' style="width:850px; height:200px; position:relative; margin:auto; padding-top:50px; padding-left:50px;">
-
-
-<form id='newentry' method='get'>
-  Title: <input type="text" name="title" class='input'><br>
-  Description: <input type="text" name="description" size='40' class='input'><br>
-  Author: <input type="text" name="author" class='input'><br>
-  <input type="submit" value="Submit" id ='submit'>
-</form>
-
-
-
+<div id='blogroll' style="width:850px; height:570px; border: 1px solid grey; position:relative; margin:auto; padding-top:50px; padding-left:50px; overflow:auto;">
 
 </div>
 
+<div id='form' style="width:850px; height:200px; position:relative; margin:auto; padding-top:50px; padding-left:50px; ">
 
 
-<script> 
+	<form id='newentry' method='get'>
+		  Title: <input type="text" name="title" class='input'><br>
+		  Description: <input type="text" name="description" size='40' class='input'><br>
+		  Author: <input type="text" name="author" class='input'><br>
+		  <input type="submit" value="Submit" id ='submit'>
+	</form>
 
 
-
-/*
-$('#newentry').submit( function(){
-
-var title = this.elements[0].value;
-var description = this.elements[1].value;
-var author = this.elements[2].value; 
-
-$('.input').val('');
-
-
-console.log(title, author, description);
-
-return false;
-
-});
-
-*/
-
-
-</script>
-
-
-
-
-
+</div>
 
 
 </body>
