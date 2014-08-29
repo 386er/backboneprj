@@ -8,23 +8,32 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 <title>Testprojekt Backbone.js</title>
 
 <script src="http://localhost/~intern/repos/backboneprj/library/jquery.js"></script>
-<script src="http://localhost/~intern/repos/backboneprj/library/underscore.js"></script>  
+<script src="http://localhost/~intern/repos/backboneprj/library/underscore.js"></script>
 <script src="http://localhost/~intern/repos/backboneprj/library/backbone.js"></script>
 <script src="http://localhost/~intern/repos/backboneprj/application.js"> </script>
-
-<script type="text/javascript" >  
-
+<!-- <script src="http://localhost/~intern/repos/backboneprj/constructor.js"> </script> -->
+<script type="text/javascript" >
+/*global init*/
 $(function() {
-	var JSONdata = [];
-	var datafile = $.getJSON("http://localhost/~intern/repos/backboneprj/data.json", function(data){
 
-		$.each(data, function(key, val) {
+	var $dfdOne = $.getJSON("http://localhost/~intern/repos/backboneprj/data.json");
+	var $dfdTwo = $.get('http://localhost/~intern/repos/backboneprj/post.html');
+
+
+	//init(JSONdata)
+
+	$.when($dfdOne, $dfdTwo).then( function(responseJSON, responseHTML) {
+
+		var JSONdata = [];
+		$.each(responseJSON[0], function(key, val) {
 			JSONdata.push(val);
 			JSONdata = _.flatten(JSONdata);
 		});
 
-		init(JSONdata);
-	});
+	 	init(JSONdata, responseHTML[0])
+
+	})
+
 });
 
 </script>
@@ -33,20 +42,20 @@ $(function() {
 
 <body style="width:100%;height:100%;background-size:100% 100%;margin:0px">
 
-<div id='blogroll' style="width:850px; height:570px; border: 1px solid grey; position:relative; margin:auto; padding-top:50px; padding-left:50px; overflow:auto;">
+<div id='blogroll' style="width:850px; height:570px; border: 1px solid grey; position:relative; margin:auto; padding-top:50px; padding-left:50px; overflow:auto; border-top:0px">
 
 </div>
 
 <div id='form' style="width:850px; height:200px; position:relative; margin:auto; padding-top:50px; padding-left:50px; ">
 
 
-	<form id='newentry' method='get'>
+<!--	<form id='newentry'>
 		  Title: <input type="text" name="title" class='input'><br>
 		  Description: <input type="text" name="description" size='40' class='input'><br>
 		  Author: <input type="text" name="author" class='input'><br>
 		  <input type="submit" value="Submit" id ='submit'>
 	</form>
-
+-->
 
 </div>
 
