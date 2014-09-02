@@ -10,19 +10,28 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 <script src="http://localhost/~intern/repos/backboneprj/library/jquery.js"></script>
 <script src="http://localhost/~intern/repos/backboneprj/library/underscore.js"></script>
 <script src="http://localhost/~intern/repos/backboneprj/library/backbone.js"></script>
-<script src="http://localhost/~intern/repos/backboneprj/application.js"> </script>
-<!-- <script src="http://localhost/~intern/repos/backboneprj/constructor.js"> </script> -->
+<script src="http://localhost/~intern/repos/backboneprj/library/mustache.js"></script>
 <script type="text/javascript" >
+	window.backboneprj = {
+	}
+</script>
+<script src="http://localhost/~intern/repos/backboneprj/blogitem.js"></script>
+<script src="http://localhost/~intern/repos/backboneprj/blogcollection.js"></script>
+<script src="http://localhost/~intern/repos/backboneprj/blogeditview.js"></script>
+<script src="http://localhost/~intern/repos/backboneprj/blogview.js"></script>
+<script src="http://localhost/~intern/repos/backboneprj/blogcollectionview.js"></script>
+<script src="http://localhost/~intern/repos/backboneprj/application.js"></script>
+<script type="text/javascript" >
+
 /*global init*/
 $(function() {
 
-	var $dfdOne = $.getJSON("http://localhost/~intern/repos/backboneprj/data.json");
+	var $dfdOne = $.getJSON('http://localhost/~intern/repos/backboneprj/data.json');
 	var $dfdTwo = $.get('http://localhost/~intern/repos/backboneprj/post.html');
+	var $dfdThr = $.get('http://localhost/~intern/repos/backboneprj/form.html');
 
-
-	//init(JSONdata)
-
-	$.when($dfdOne, $dfdTwo).then( function(responseJSON, responseHTML) {
+	$.when($dfdOne, $dfdTwo, $dfdThr).then( function(responseJSON, responseHTMLone,
+		responseHTMLtwo) {
 
 		var JSONdata = [];
 		$.each(responseJSON[0], function(key, val) {
@@ -30,7 +39,11 @@ $(function() {
 			JSONdata = _.flatten(JSONdata);
 		});
 
-	 	init(JSONdata, responseHTML[0])
+		backboneprj.data = JSONdata;
+		backboneprj.BlogViewTemplate = responseHTMLone[0];
+		backboneprj.FormViewTemplate = responseHTMLtwo[0];
+
+		init();
 
 	})
 
@@ -43,28 +56,12 @@ $(function() {
 <body style="width:100%;height:100%;background-size:100% 100%;margin:0px">
 
 <div id='blogroll' style="width:850px; height:570px; border: 1px solid grey; position:relative; margin:auto; padding-top:50px; padding-left:50px; overflow:auto; border-top:0px">
-
 </div>
 
 <div id='form' style="width:850px; height:200px; position:relative; margin:auto; padding-top:50px; padding-left:50px; ">
-
-
-<!--	<form id='newentry'>
-		  Title: <input type="text" name="title" class='input'><br>
-		  Description: <input type="text" name="description" size='40' class='input'><br>
-		  Author: <input type="text" name="author" class='input'><br>
-		  <input type="submit" value="Submit" id ='submit'>
-	</form>
--->
-
 </div>
-
 
 </body>
 
-
 </html>
-
-
-
 

@@ -1,13 +1,13 @@
  {
- 	"entries": 
+ 	"entries":
 
  		[
 
 	 	{
-			"title": "Here you go",
+			"title": "here you go",
 			"description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
 			"author": "Peter",
-			"id ": 0		
+			"id": 0
 		},
 		{
 			"title": "another one",
@@ -38,8 +38,8 @@
 			"description": "Hardcore on a ridiculously soft scale, give it to me!",
 			"author": "Mr.Y",
 			"id": 4
-					
-		} 
+
+		}
 
 		]
 
