@@ -1,7 +1,7 @@
- {
- 	"entries":
 
- 		[
+define([], function( ) {
+
+var json = [
 
 	 	{
 			"title": "here you go",
@@ -41,6 +41,9 @@
 
 		}
 
-		]
+		];
 
-}
+
+return json
+
+});
