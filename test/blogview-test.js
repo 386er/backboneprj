@@ -7,8 +7,9 @@ define([
 	var assert = buster.assert;
 
 	buster.testCase('A test case', {
-		'test the module': function() {
+		'for BlogView': function() {
 			assert.equals('blogpost', (new BlogView({model: new BlogItem()})).className);
 		}
 	});
+
 });
