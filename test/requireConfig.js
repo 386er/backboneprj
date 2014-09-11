@@ -1,8 +1,9 @@
 /*global require*/
 require.config({
 
-	baseUrl: './build',
+	baseUrl: './src',
 	paths: {
+		'test': '../test',
 		text: 'library/text',
 		jquery: 'library/jquery',
 		underscore: 'library/underscore',
@@ -10,11 +11,3 @@ require.config({
 		mustache: 'library/mustache'
 	}
 });
-
-
-require(['modules/application'], function(pageloader) {
-
-	pageloader.init();
-
-});
-
