@@ -18,14 +18,14 @@ define(['jquery',
 			var blogCollection = new BlogCollection();
 
 			var blogEditView = new BlogEditView({
-				model: new BlogItem, collection: blogCollection});
+				model: new BlogItem(), collection: blogCollection});
 
 
 			blogEditView.render();
 			$('#form').html(blogEditView.el);
 
-			blogCollection.reset(dataJSON);
 
+			blogCollection.reset(dataJSON);
 
 			var blogCollectionView = new BlogCollectionView({
 				collection: blogCollection});
