@@ -31,10 +31,9 @@ define(['jquery',
 				var title = $('.input')[0].value;
 				var description = $('.input')[1].value;
 				var author = $('.input')[2].value;
-				var id = this.collection.length;
 
 				var newblogItem = new BlogItem(
-					{title: title, description: description, author:author, id:id});
+					{title: title, description: description, author:author});
 
 				this.model = new BlogItem (
 					{title:'', description:'', author:'', id:'emptyform'}
