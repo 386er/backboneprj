@@ -1,7 +1,7 @@
 /*global require*/
 require.config({
 
-	baseUrl: './build',
+	baseUrl: '.',
 	paths: {
 		text: 'library/text',
 		jquery: 'library/jquery',
