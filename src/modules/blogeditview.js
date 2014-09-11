@@ -1,81 +1,80 @@
-/*global backboneprj*/
 
 define(['jquery',
-		'backbone',
-		'mustache',
-		'modules/blogitem',
-		'text!modules/form.html' ], function($, Backbone, Mustache, BlogItem, formHTML ) {
+	'backbone',
+	'mustache',
+	'modules/blogitem',
+'text!modules/form.html' ], function($, Backbone, Mustache, BlogItem, formHTML ) {
 
-	BlogEditView = Backbone.View.extend({
+	var BlogEditView = Backbone.View.extend({
 
-			events: {
-				'click #submit' : 'changePost',
-				'change .radio' : 'sortBlog'
-			},
+		events: {
+			'click #submit' : 'changePost',
+			'change .radio' : 'sortBlog'
+		},
 
-			initialize:  function(options) {
-				this.model.resetEmpty();
-				this.model.on('change', this.render, this);
-				this.collection = options.collection;
-			},
+		initialize:  function(options) {
+			this.model.resetEmpty();
+			this.model.on('change', this.render, this);
+			this.collection = options.collection;
+		},
 
-			render: function() {
-				var attributes = this.model.toJSON();
-				this.$el.html(Mustache.render(formHTML,
-					attributes));
-			},
+		render: function() {
+			var attributes = this.model.toJSON();
+			this.$el.html(Mustache.render(formHTML,
+				attributes));
+		},
 
-			changePost: function() {
+		changePost: function() {
 
-				if ( this.model.get('id') == 'emptyform' ) {
+			if ( this.model.get('id') == 'emptyform' ) {
 
-					var title = $('.input')[0].value;
-					var description = $('.input')[1].value;
-					var author = $('.input')[2].value;
-					var id = this.collection.length;
+				var title = $('.input')[0].value;
+				var description = $('.input')[1].value;
+				var author = $('.input')[2].value;
+				var id = this.collection.length;
 
-					var newblogItem = new BlogItem(
-						{title: title, description: description, author:author, id:id});
+				var newblogItem = new BlogItem(
+					{title: title, description: description, author:author, id:id});
 
-					this.model = new BlogItem (
-						{title:'', description:'', author:'', id:'emptyform'}
-					);
+				this.model = new BlogItem (
+					{title:'', description:'', author:'', id:'emptyform'}
+				);
 
-					this.render();
-					this.collection.add(newblogItem);
-
-				}
-
-				else {
-
-					var title = $('.input')[0].value;
-					var description = $('.input')[1].value;
-					var author = $('.input')[2].value;
-
-					this.model.set({
-						title: title,
-						description: description,
-						author: author
-					});
-
-					this.model = new BlogItem (
-						{title:'', description:'', author:'', id:'emptyform'}
-					);
-
-					this.render();
-
-				}
-			},
-
-			sortBlog: function(){
-
-				this.collection.sort();
+				this.render();
+				this.collection.add(newblogItem);
 
 			}
 
+			else {
 
-		})
+				var titleElse = $('.input')[0].value;
+				var descriptionElse = $('.input')[1].value;
+				var authorElse = $('.input')[2].value;
 
-	return BlogEditView
+				this.model.set({
+					title: titleElse,
+					description: descriptionElse,
+					author: authorElse
+				});
+
+				this.model = new BlogItem (
+					{title:'', description:'', author:'', id:'emptyform'}
+				);
+
+				this.render();
+
+			}
+		},
+
+		sortBlog: function() {
+
+			this.collection.sort();
+
+		}
+
+
+	});
+
+	return BlogEditView;
 
 });

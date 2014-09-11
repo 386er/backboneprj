@@ -9,7 +9,6 @@ var uglify = require('gulp-uglify');
 gulp.task('move', function() {
 	gulp.src(['./src/**/*.*', '!./src/**/*.styl'])
 	.pipe(gulp.dest('build'))
-	// .pipe(reload({stream:true}))
 });
 
 gulp.task('stylus', function() {

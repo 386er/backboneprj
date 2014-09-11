@@ -1,13 +1,17 @@
-/*global Backbone*/
 
 define(['jquery',
-		'modules/blogcollection',
-		'modules/blogeditview',
-		'modules/blogitem',
-		'modules/blogcollectionview',
-		'modules/json'], function($, BlogCollection, BlogEditView, BlogItem, BlogCollectionView, dataJSON) {
+	'modules/blogcollection',
+	'modules/blogeditview',
+	'modules/blogitem',
+	'modules/blogcollectionview',
+'modules/json'], function($,
+	BlogCollection,
+	BlogEditView,
+	BlogItem,
+	BlogCollectionView,
+	dataJSON) {
 
-	pageloader = {
+	var pageloader = {
 
 		init : function() {
 
@@ -36,8 +40,8 @@ define(['jquery',
 
 		}
 
-	}
+	};
 
-	return pageloader
+	return pageloader;
 
 });

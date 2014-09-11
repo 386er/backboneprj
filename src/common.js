@@ -1,4 +1,5 @@
-
+/*global require*/
+/*global requirejs*/
 
 requirejs.config({
 
