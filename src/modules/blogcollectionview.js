@@ -1,9 +1,16 @@
 
 define(['jquery',
 	'backbone',
-'modules/blogview'], function($, Backbone, BlogView) {
+	'modules/blogView',
+	'text!modules/radio.html'
+], function($, Backbone, BlogView, Radiobutton) {
 
 	var BlogCollectionView =  Backbone.View.extend({
+
+
+		events: {
+			'click .radio': 'changeSort',
+		},
 
 		initialize: function() {
 			this.collection.on('add', this.addOne, this);
@@ -12,7 +19,16 @@ define(['jquery',
 
 		render: function() {
 			this.$el.html('');
+			this.$el.append(Radiobutton);
+			this.$el.find('.radio[value=' +
+				this.collection.compareBy +
+				']').prop('checked', true);
 			this.collection.forEach(this.addOne, this);
+		},
+
+		changeSort: function(event) {
+			this.collection.compareBy = event.target.value;
+			this.collection.sort();
 		},
 
 

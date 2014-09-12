@@ -11,7 +11,6 @@ require.config({
 	}
 });
 
-
 require(['modules/application'], function(pageloader) {
 
 	pageloader.init();
