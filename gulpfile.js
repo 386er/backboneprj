@@ -1,20 +1,20 @@
+/*global require*/
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
-var reload      = browserSync.reload;
 var stylus = require('gulp-stylus');
 var rjs = require('gulp-requirejs');
 var uglify = require('gulp-uglify');
 
 
 gulp.task('move', function() {
-	gulp.src(['./src/**/*.*', '!./src/**/*.styl'])
-	.pipe(gulp.dest('build'))
+	return gulp.src(['./src/**/*.*', '!./src/**/*.styl']).
+		pipe(gulp.dest('build'));
 });
 
 gulp.task('stylus', function() {
-	gulp.src('./src/css/style.styl')
-    .pipe(stylus())
-    .pipe(gulp.dest('build/css'));
+	return gulp.src('./src/css/style.styl').
+		pipe(stylus()).
+		pipe(gulp.dest('build/css'));
 });
 
 
@@ -25,7 +25,9 @@ gulp.task('watch', function() {
 });
 
 
-gulp.task('build', ['move', 'stylus']);
+gulp.task('build', ['move', 'stylus'], function(cb) {
+	cb();
+});
 
 
 gulp.task('optimize', ['build'], function() {
@@ -54,6 +56,12 @@ gulp.task('default', ['build', 'browser-sync']);
 
 
 gulp.task('production', ['optimize'], function() {
-	gulp.src(['./build/**/*.css', './build/index.html', './build/**/require.js']).
-	pipe(gulp.dest('./production'));
+	var
+		stream = gulp.src([
+			'./build/**/*.css',
+			'./build/index.html',
+			'./build/**/require.js'
+		]).
+		pipe(gulp.dest('./production'));
+	return stream;
 });
