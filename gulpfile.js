@@ -4,6 +4,7 @@ var browserSync = require('browser-sync');
 var stylus = require('gulp-stylus');
 var rjs = require('gulp-requirejs');
 var uglify = require('gulp-uglify');
+var jshint = require('gulp-jshint');
 
 
 gulp.task('move', function() {
@@ -62,6 +63,8 @@ gulp.task('production', ['optimize'], function() {
 			'./build/index.html',
 			'./build/**/require.js'
 		]).
+		pipe(jshint()).
+		pipe(jshint.reporter('default')).
 		pipe(gulp.dest('./production'));
 	return stream;
 });

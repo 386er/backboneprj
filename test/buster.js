@@ -20,11 +20,11 @@ config['Backbone Project Test'] = {
 		'src/modules/*.html'
 	],
 	tests: [
-		'test/test-blogCollectionView.js',
-		'test/test-blogCollection.js',
-		'test/test-blogView.js',
-		'test/test-blogItem.js',
-		'test/test-blogEditView.js'
+		'test/TestBlogCollectionView.js',
+		'test/TestBlogCollection.js',
+		'test/TestBlogView.js',
+		'test/TestBlogItem.js',
+		'test/TestBlogEditView.js'
 	],
 	extensions: [require('buster-amd')],
 };
