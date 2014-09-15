@@ -3,7 +3,8 @@ define(['jquery',
 	'backbone',
 	'mustache',
 	'modules/blogItem',
-'text!modules/form.html' ], function($, Backbone, Mustache, BlogItem, formHTML ) {
+	'text!modules/form.html'
+], function($, Backbone, Mustache, BlogItem, formHTML ) {
 
 	var BlogEditView = Backbone.View.extend({
 
