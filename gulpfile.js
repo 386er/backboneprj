@@ -5,6 +5,7 @@ var stylus = require('gulp-stylus');
 var rjs = require('gulp-requirejs');
 var uglify = require('gulp-uglify');
 var jshint = require('gulp-jshint');
+var jscs = require('gulp-jscs');
 
 
 gulp.task('move', function() {
@@ -19,6 +20,16 @@ gulp.task('stylus', function() {
 });
 
 
+gulp.task('validate', function() {
+
+	return gulp.src('./src/modules/*.js').
+		pipe(jscs()).
+		pipe(jshint()).
+		pipe(jshint.reporter('default'));
+
+});
+
+
 
 gulp.task('watch', function() {
 	gulp.watch('./src/**/*.*', ['move']);
@@ -26,7 +37,7 @@ gulp.task('watch', function() {
 });
 
 
-gulp.task('build', ['move', 'stylus'], function(cb) {
+gulp.task('build', ['move', 'stylus', 'validate'], function(cb) {
 	cb();
 });
 
@@ -63,8 +74,6 @@ gulp.task('production', ['optimize'], function() {
 			'./build/index.html',
 			'./build/**/require.js'
 		]).
-		pipe(jshint()).
-		pipe(jshint.reporter('default')).
 		pipe(gulp.dest('./production'));
 	return stream;
 });
